@@ -1,0 +1,1 @@
+INDEX VERSION 1.131+C:\Users\Lalo\Documents\GitHub\Escuela\Lenguajes y Autómatas I\Programas\.metadata\.plugins\org.eclipse.jdt.core

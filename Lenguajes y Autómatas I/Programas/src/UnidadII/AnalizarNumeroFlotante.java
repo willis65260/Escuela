@@ -15,14 +15,13 @@ public class AnalizarNumeroFlotante {
 		String Decimales="(0|([0-9]*[1-9]))";
 		String Decimales2="([0-9]*[1-9])";
 //		String Exponenciales="("+Decimales+"E?e?"+Enteros+")";
-		String Exponenciales="("+Decimales2+"[eE]?"+Enteros+")";
+		String Exponenciales="("+Decimales2+"[eE]?"+Enteros+"[.]"+Decimales+")";
 //		Pattern p = Pattern.compile("[1-9]?[0-9]*.[0-9][1-9]+[[eE]?[-+]?]");
 		Pattern p=Pattern.compile(Enteros+"[.]("+Decimales+"|"+Exponenciales+")");
-		Matcher m = p.matcher("0.0E-3");
+		Matcher m = p.matcher("-0.0");
 		boolean b = m.matches();
 		
 		System.out.println(b);
-		
 	}
 	
 	public String LeerCadena() {
