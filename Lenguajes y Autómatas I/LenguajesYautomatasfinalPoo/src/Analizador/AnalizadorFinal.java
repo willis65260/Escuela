@@ -48,7 +48,7 @@ public class AnalizadorFinal {
 	
 	File aux;
 	JEditorPane editorPane;
-	
+	NumeroLinea nl;
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 620, 300);
@@ -56,6 +56,8 @@ public class AnalizadorFinal {
 		//JEditorPane 
 		 editorPane = new JEditorPane();
 		 JScrollPane sp1 = new JScrollPane( editorPane,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		 nl=new NumeroLinea(editorPane);
+		 sp1.setRowHeaderView(nl);
 		 JLabel lblnombrearchivo = new JLabel("        New labelhkbkvkvvhvhvhvhvkhvkhvhkvh");
 	      frame.getContentPane().add(sp1, BorderLayout.CENTER);
 		JToolBar Menu = new JToolBar();
@@ -168,23 +170,23 @@ public class AnalizadorFinal {
         return contenido;
     }
 	
-	public void guardarArchivoComo(){
-		if(aux!=null) {
-			try {
-				FileWriter fichero=new FileWriter(aux);
-				PrintWriter pw= new PrintWriter(fichero);
-				editorPane.getText();
-				pw.print(editorPane.getText());
-				pw.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}catch (IOException err) {
-				err.printStackTrace();
-			}
-			
-		}
-		
-	}
+//	public void guardarArchivoComo(){
+//		if(aux!=null) {
+//			try {
+//				FileWriter fichero=new FileWriter(aux);
+//				PrintWriter pw= new PrintWriter(fichero);
+//				editorPane.getText();
+//				pw.print(editorPane.getText());
+//				pw.close();
+//			} catch (FileNotFoundException e) {
+//				e.printStackTrace();
+//			}catch (IOException err) {
+//				err.printStackTrace();
+//			}
+//			
+//		}
+//		
+//	}
 	public void guardarArchivo() {
 		JFileChooser fileChooser = new JFileChooser();
 //		FileNameExtensionFilter filter = new FileNameExtensionFilter("solo txt y doc", "txt", "doc");
