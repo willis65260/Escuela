@@ -48,10 +48,12 @@ public class AnalizadorFinal {
 	
 	File aux;
 	JEditorPane editorPane;
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 620, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//JEditorPane 
 		 editorPane = new JEditorPane();
 		 JScrollPane sp1 = new JScrollPane( editorPane,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		 JLabel lblnombrearchivo = new JLabel("        New labelhkbkvkvvhvhvhvhvkhvkhvhkvh");
@@ -166,7 +168,7 @@ public class AnalizadorFinal {
         return contenido;
     }
 	
-	public void guardarArchivo(){
+	public void guardarArchivoComo(){
 		if(aux!=null) {
 			try {
 				FileWriter fichero=new FileWriter(aux);
@@ -182,5 +184,30 @@ public class AnalizadorFinal {
 			
 		}
 		
+	}
+	public void guardarArchivo() {
+		JFileChooser fileChooser = new JFileChooser();
+//		FileNameExtensionFilter filter = new FileNameExtensionFilter("solo txt y doc", "txt", "doc");
+//		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		int seleccion = fileChooser.showOpenDialog(editorPane);
+		if (seleccion == JFileChooser.APPROVE_OPTION)
+		{
+			if(aux!=null) {
+				try {
+					File archivo= new File(fileChooser.getSelectedFile()+".txt");
+					FileWriter fichero=new FileWriter(archivo);
+					PrintWriter pw= new PrintWriter(fichero);
+					editorPane.getText();
+					pw.print(editorPane.getText());
+					pw.close();
+					
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}catch (IOException err) {
+					err.printStackTrace();
+				}
+				
+			}
+		}
 	}
 }
