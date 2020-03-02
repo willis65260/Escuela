@@ -4,10 +4,12 @@ from tkinter import *
 direccion_servidor='DESKTOP-DNTT8D6/SQLEXPRESS'
 nombre_bd='UAER_UNAM'
 nombre_usuario='DESKTOP-DNTT8D6/Lalo'
-contraseña=' '
+contrasea=''
 
 try:
-    conexion=pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+direccion_servidor+';DATABASE='+nombre_bd+';UID='+nombre_usuario+';PWD='+contraseña)
+    conexion=pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+
+                            direccion_servidor+';DATABASE='+nombre_bd+';UID='+
+                            nombre_usuario+';PWD='+contrasea)
     
     
 
@@ -22,3 +24,4 @@ try:
     root.mainloop()
 except Exception as e:
     print("Error garrafal: ",e)
+    
