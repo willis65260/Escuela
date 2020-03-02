@@ -52,4 +52,47 @@ declare @CVE_Emp int
 				VALUES(@CVE_Emp,@Nombre,@ApellidoP,@ApellidoM,@telefono,@turno)
 		
 
+
+/*Procedimiento Para Agregar Ventas*/
+CREATE PROCEDURE PAAgregarventas
+as
+declare @cveventa int
+IF(SELECT COuNT(*) FROM VENTAS )=0
+			SET @cveventa= 1000
+		ELSE
+			SET @cveventa=(SELECT MAX(CVEVENTA) FROM VENTAS )+1
+			begin
+				begin tran
+					insert into VENTAS(CVEVENTA) values(@cveventa)
+					insert into ABARROTESCONSUELO.dbo.VENTAS(CVEVENTA) values(@cveventa)
+				commit tran
+			end
 /*Procedimiento Insertar Productos*/
+CREATE PROCEDURE PAInserproductos
+@cveProd int,
+@NomProd varchar(33),
+@fechacadProd date
+/*@Ban int output*/
+AS
+if(@cveProd is null)
+	print 'La clave no puede estar vacia'
+else
+if(@NomProd='')
+	print 'El nombre del producto no puede estar vacio'
+else
+if(@fechacadProd='')
+	print 'La fecha de caducidad del producto no puede estar vacia'
+else
+if(LEN(@NomProd)>30)
+	print 'El nommbre del producto no puede tener mas de 30 caracteres'
+else
+if( (SELECT COUNT(*) FROM PRODUCTOS WHERE CVEPRODUCTOS=@cveProd)>0)
+	print 'Ese producto ya ha sido registrado'
+else
+	begin
+		begin tran
+			insert into PRODUCTOS(CVEPRODUCTOS,NOMBREPRO,FECHACADUCIDAD) VALUES(@cveProd,@NomProd,@fechacadProd)
+			insert into ABARROTESCONSUELO.dbo.PRODUCTOS(CVEPRODUCTOS,NOMBREPRO,FECHACADUCIDAD) VALUES(@cveProd,@NomProd,@fechacadProd)
+			insert into ABARROTESCONSUELOfracompras.dbo.PRODUCTOS(CVEPRODUCTOS,NOMBREPRO,FECHACADUCIDAD) VALUES(@cveProd,@NomProd,@fechacadProd)
+		commit tran
+	end
