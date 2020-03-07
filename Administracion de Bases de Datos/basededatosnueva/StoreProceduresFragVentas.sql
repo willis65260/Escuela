@@ -155,6 +155,9 @@ else
 					update ABARROTESCONSUELO.dbo.DETALLEVTAPROD set CANTIDADVTA=CANTIDADVTA+@cantidad where CVEPRODUCTO=@cveproducto and CVEVENTA=@cveventa
 					update ABARROTESCONSUELO.dbo.VENTAS set TOTALVTA=TOTALVTA+(@cantidad*(Select PRECIOVTA from PRODUCTOS where CVEPRODUCTOS=@cveproducto)) where CVEVENTA=@cveventa
 					update ABARROTESCONSUELO.dbo.PRODUCTOS set EXISTENCIA=EXISTENCIA-@cantidad where CVEPRODUCTOS=@cveproducto
+					
+					/*Hace Falta Poner Los Updates Para el Fragmentos de compras*/
+					
 					commit tran
 				end
 			else
@@ -171,6 +174,8 @@ else
 			insert into ABARROTESCONSUELO.dbo.DETALLEVTAPROD values(@cveproducto,@cveventa,@cantidad)
 			update ABARROTESCONSUELO.dbo.VENTAS set TOTALVTA=TOTALVTA+(@cantidad*(Select PRECIOVTA from PRODUCTOS where CVEPRODUCTOS=@cveproducto)) where CVEVENTA=@cveventa
 			update ABARROTESCONSUELO.dbo.PRODUCTOS set EXISTENCIA=EXISTENCIA-@cantidad where CVEPRODUCTOS=@cveproducto
+			
+			/*Hace Falta Poner Los Updates para el Fragmentos de compras*/
 			commit tran
 		end
 	else

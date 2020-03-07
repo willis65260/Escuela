@@ -31,7 +31,7 @@ TOTALVTA MONEY DEFAULT(0) NOT NULL
  NOMBREPRO VARCHAR(30) NOT NULL,
  FECHACADUCIDAD DATE NOT NULL,
  EXISTENCIA INT DEFAULT(0) NOT NULL,
- Edoproducto int default(1)NOT NULL,
+ Edoproducto int default(1)NOT NULL,/*Esto fue lo unico que cambio en productos*/
  PRECIOVTA MONEY DEFAULT(0)
  )
 
