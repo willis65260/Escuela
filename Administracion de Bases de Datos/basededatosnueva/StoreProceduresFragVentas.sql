@@ -96,3 +96,84 @@ else
 			insert into ABARROTESCONSUELOfracompras.dbo.PRODUCTOS(CVEPRODUCTOS,NOMBREPRO,FECHACADUCIDAD) VALUES(@cveProd,@NomProd,@fechacadProd)
 		commit tran
 	end
+
+
+/*Procedimiento Detalle Empleado-Venta*/
+CREATE PROCEDURE Padetempvta
+@CVE_Emp int,
+@CVE_Vta int
+
+as
+
+if(@CVE_Emp is null or @CVE_Emp=0)
+print 'La clave del empleado no puede ser nula ni ser cero'
+else
+if(@CVE_Vta is null or @CVE_Vta=0)
+print 'La clave de la venta no puede ser nula ni ser cero'
+else
+	if((SELECT COUNT(*) FROM DETALLEEMPVTA WHERE CVEEMPLEADO=@CVE_Emp and CVEVENTA=@CVE_Vta)>0)
+		print 'A la venta ya se le fue asignado un empleado el cual es el mismo que se le quiere agregar'
+	else
+		if((SELECT COUNT(*) FROM DETALLEEMPVTA WHERE CVEVENTA=@CVE_Vta)>0)
+			print 'A la venta ya se le asigno un empleado'
+		else
+			begin
+				begin tran
+					insert into DETALLEEMPVTA values(@CVE_Emp,@CVE_Vta)
+					insert into ABARROTESCONSUELO.dbo.DETALLEEMPVTA values(@CVE_Emp,@CVE_Vta)
+				commit tran
+			end
+
+
+/*Procedimiento Detalle Venta*/
+create procedure PADetvtaprod
+@cveproducto int,
+@cveventa int,
+@cantidad int
+as
+	if(@cveproducto is null or @cveventa is null or @cantidad is null)
+		begin 
+			if @cveproducto is null
+				print('La clave del producto no puede estar vacia o nula')
+			if @cveventa is null
+				print('La clave de la ventao no puede estar vacia o nula')
+			if @cantidad is null
+				print('La cantidad de venta no puede estar vacia o nula')
+		end
+--Se puede validar si el producto no se encuentra registrado sin embargo si esta en la tineda pues es por que esta registrado 
+--Al igual que la venta se puede validar que exista la venta pero el sistemas la creera automaticamente asi que exitira 
+else
+	if(Select count(*) from DETALLEVTAPROD where CVEPRODUCTO=@cveproducto and CVEVENTA=@cveventa)>0
+		begin 
+			if (select EXISTENCIA from PRODUCTOS where CVEPRODUCTOS=@cveproducto)>=@cantidad
+				begin
+					begin tran
+					update DETALLEVTAPROD set CANTIDADVTA=CANTIDADVTA+@cantidad where CVEPRODUCTO=@cveproducto and CVEVENTA=@cveventa
+					update VENTAS set TOTALVTA=TOTALVTA+(@cantidad*(Select PRECIOVTA from PRODUCTOS where CVEPRODUCTOS=@cveproducto)) where CVEVENTA=@cveventa
+					update PRODUCTOS set EXISTENCIA=EXISTENCIA-@cantidad where CVEPRODUCTOS=@cveproducto
+
+					update ABARROTESCONSUELO.dbo.DETALLEVTAPROD set CANTIDADVTA=CANTIDADVTA+@cantidad where CVEPRODUCTO=@cveproducto and CVEVENTA=@cveventa
+					update ABARROTESCONSUELO.dbo.VENTAS set TOTALVTA=TOTALVTA+(@cantidad*(Select PRECIOVTA from PRODUCTOS where CVEPRODUCTOS=@cveproducto)) where CVEVENTA=@cveventa
+					update ABARROTESCONSUELO.dbo.PRODUCTOS set EXISTENCIA=EXISTENCIA-@cantidad where CVEPRODUCTOS=@cveproducto
+					commit tran
+				end
+			else
+				print('No tenemos en inventario el o los productos que quiere comprar')
+		end
+	else 
+	if (select EXISTENCIA from PRODUCTOS where CVEPRODUCTOS=@cveproducto)>=@cantidad
+		begin
+			begin tran
+			insert into DETALLEVTAPROD values(@cveproducto,@cveventa,@cantidad)
+			update VENTAS set TOTALVTA=TOTALVTA+(@cantidad*(Select PRECIOVTA from PRODUCTOS where CVEPRODUCTOS=@cveproducto)) where CVEVENTA=@cveventa
+			update PRODUCTOS set EXISTENCIA=EXISTENCIA-@cantidad where CVEPRODUCTOS=@cveproducto
+
+			insert into ABARROTESCONSUELO.dbo.DETALLEVTAPROD values(@cveproducto,@cveventa,@cantidad)
+			update ABARROTESCONSUELO.dbo.VENTAS set TOTALVTA=TOTALVTA+(@cantidad*(Select PRECIOVTA from PRODUCTOS where CVEPRODUCTOS=@cveproducto)) where CVEVENTA=@cveventa
+			update ABARROTESCONSUELO.dbo.PRODUCTOS set EXISTENCIA=EXISTENCIA-@cantidad where CVEPRODUCTOS=@cveproducto
+			commit tran
+		end
+	else
+		begin
+			print('No tenemos en inventario el o los productos que quiere comprar')
+		end

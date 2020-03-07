@@ -377,6 +377,9 @@ Execute Padetempvta 107,1011
 
 select* from EMPLEADOS
 select* from VENTAS
+
+
+
 -- empieza el detalle vtaprod
 create procedure PADetvtaprod
 @cveproducto int,
