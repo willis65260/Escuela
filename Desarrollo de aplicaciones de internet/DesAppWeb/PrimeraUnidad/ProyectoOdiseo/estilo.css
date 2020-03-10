@@ -1,0 +1,61 @@
+:root {
+    font-size: 15px;
+    font-family: 'Open Sans';
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#cad-val {
+    display: none;
+}
+
+.div-input {
+    display: flex;
+}
+
+.div-alfabeto,
+.state-table,
+.cad-val {
+    /* height: 100px; */
+    padding: 3rem;
+    width: 80vw;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    border-bottom: 2px solid #999999;
+}
+
+.div-alf-item {
+    margin: 1rem;
+}
+
+#boton-alfabeto,
+#boton-tabla,
+#boton-cad {
+    height: 3rem;
+    width: 7rem;
+}
+
+#helper {
+    width: 0;
+    height: 0;
+    display: none;
+    visibility: hidden;
+}
+
+#state-table {
+    overflow: scroll;
+}
+
+table {
+    border: #b2b2b2 1px solid;
+}
+
+td,
+th {
+    padding: .5rem;
+    border: black 1px solid;
+}
