@@ -239,6 +239,9 @@ function Acomodar_Selecs() {
                 if (v2 == 46 + andrea) {
                     document.getElementById("sel" + v2).selectedIndex = 7;
                 }
+                if (v2 == 101 + andrea || v2 == 69 + andrea) {
+                    document.getElementById("sel" + v2).selectedIndex = 9;
+                }
             }
 
             if (s == 6) {
