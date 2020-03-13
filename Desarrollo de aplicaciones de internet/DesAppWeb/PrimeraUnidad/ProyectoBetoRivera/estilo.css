@@ -1,6 +1,5 @@
 :root {
     font-size: 15px;
-    font-family: 'Open Sans';
     --blanco: #b6b6b6;
     --text-secondary: #ececec;
     --negro: #23232e;
@@ -12,7 +11,11 @@
     --transition-speed: 600ms;
 }
 
+
+/* 'Bellota' 'Josefine Sans' 'Quicksand' */
+
 * {
+    font-family: 'Bellota';
     margin: 0;
     padding: 0;
     /*overflow: hidden;*/
@@ -26,6 +29,20 @@ header,
 footer {
     width: 100vw;
 }
+
+.nav {
+    height: 0rem;
+}
+
+
+/* header {
+    position: fixed;
+} */
+
+
+/* .nav {
+    height: 4rem;
+} */
 
 .navbar-nav,
 .foobar-foo {
@@ -43,6 +60,49 @@ footer {
 
 #buscador {
     width: 25rem;
+    border-radius: 1rem;
+    margin: .5rem;
+}
+
+#lupa {
+    margin: .5rem;
+    /* height: ; */
+}
+
+#logo {
+    margin: .3rem;
+}
+
+#categorias {
+    font-size: 1.4rem;
+}
+
+#textost {
+    font-size: 1rem;
+    margin: 1rem;
+    font-family: 'Open Sans';
+    color: var(--blanco);
+}
+
+#textost2 {
+    text-shadow: 2px 2px 2px black;
+    font-size: 1.3rem;
+    margin: 1rem;
+    font-family: 'Open Sans';
+    color: var(--blanco);
+}
+
+#lib-bal,
+#acerca-de {
+    align-content: center;
+    /* background: rgba(0, 0, 0, .6); */
+}
+
+#bot-bal {
+    font-size: 1rem;
+    margin: 1rem;
+    font-family: 'Open Sans';
+    border-radius: 1rem;
 }
 
 .navbar-link,
@@ -50,29 +110,196 @@ footer {
     color: var(--blanco);
 }
 
-.main {
+.pag-bal {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.main,
+.Pag-Hom-prod-help {
     width: 100vw;
     height: 40rem;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    background: var(--naranja);
+    background-image: url("Recursos/Libros-Portada-1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background: var(--naranja); */
 }
 
-.producto {
+.pag-bal-50 {
+    height: 40vh;
+    width: 30vw;
+    margin-bottom: 0;
+}
+
+.Pag-Hom-prod {
+    height: 100vh;
+    width: 100vw;
+    /* padding-top: 10rem; */
+    /* margin-top: 10rem; */
+}
+
+.Pag-Hom-prod-help {
+    height: 90%;
+    padding-top: 10rem;
+    /* margin-top: 10rem; */
+}
+
+#sd {
+    background-image: url("Recursos/Libros-Portada-bal-lib.png");
+}
+
+#ds {
+    background-image: url("Recursos/IMG_20200304_181505.jpg");
+}
+
+#bal-pag-bal {
+    background-image: url("Recursos/Lib-Hom-1.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#yomerengues {
+    /* rotate: 270; 
+    transform: rotate(-90deg);
+    */
+    /* transform: rotate(270deg); */
+    background-image: url("Recursos/yop.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#hom {
+    background-image: url("Recursos/LeonardodaVinci1.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#hom-prod1 {
+    background-image: url("Recursos/Lib-Hom-160.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#hom-prod2 {
+    background-image: url("Recursos/Lib-Hom-260.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#hom-prod3 {
+    background-image: url("Recursos/Lib-Hom-360.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#hom-prod4 {
+    background-image: url("Recursos/Lib-Hom-460.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.hom-prod#hom-prod1:hover {
+    background-image: url("Recursos/Lib-Hom-1.jpg");
+}
+
+.hom-prod#hom-prod2:hover {
+    background-image: url("Recursos/Lib-Hom-2.jpg");
+}
+
+.hom-prod#hom-prod3:hover {
+    background-image: url("Recursos/Lib-Hom-3.jpg");
+}
+
+.hom-prod#hom-prod4:hover {
+    background-image: url("Recursos/Lib-Hom-4.jpg");
+}
+
+.prod-hombres {
+    text-align: right;
+    margin-top: 20rem;
+}
+
+.prod-mujeres {
+    text-align: left;
+    margin-left: 0rem;
+    /* color: #ececec; */
+}
+
+#muj {
+    background-image: url("Recursos/harrypotter.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/* .producto {
     height: 5rem;
     width: 3rem;
     margin: 3rem;
     padding: 3rem;
     background: var(--verde);
+    font-size: 2rem;
+    color: var(--blanco);
+    font-family: 'Bellota';
+    font-size: 3rem;
+} */
+
+.producto {
+    height: 70%;
+    width: 35%;
+    margin-top: 6rem;
+    padding: 1rem;
+    /* background: var(--verde); */
+    font-family: 'Bellota';
+    font-size: 3rem;
+    color: var(--blanco);
+    /* background: ; */
+    transition: .5s;
 }
 
-.img {
+.producto#hom:hover {
+    background-image: url("Recursos/LeonardodaVinci100.png");
+}
+
+.producto#muj:hover {
+    background-image: url("Recursos/harrypotter100.png");
+}
+
+.prod-hombres,
+.prod-mujeres {
+    opacity: 1;
+}
+
+.txt-prod {
+    opacity: .8;
+}
+
+.img,
+.img-fondo {
     width: 100vw;
     height: 30rem;
     display: flex;
     justify-content: space-around;
-    background: var(--azul);
+    /* background: var(--azul); */
+}
+
+.img {
+    height: 25rem;
+    margin-top: 7.2rem;
+    margin-bottom: 1.53rem;
+}
+
+.img-fondo {
+    margin-top: 3.7rem;
+    z-index: -1;
+    background-image: url("Recursos/Libro_Abierto.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
 }
 
 .img-nav {
@@ -95,9 +322,62 @@ footer {
 }
 
 .img-big {
+    /* margin-left: -25rem; */
+    width: 100vw;
+    margin: 1rem;
+    padding: .3rem;
+    height: 90%;
+    border-radius: 3rem;
+    /* background: rgba(0, 0, 0, .3); */
+}
+
+.frase {
     width: 45rem;
     margin: 1rem;
     padding: .3rem;
     height: 90%;
-    background: var(--cafe);
+    padding: 3rem;
+}
+
+.img-big-frase {
+    color: var(--blanco);
+    font-family: 'Bellota';
+    font-size: 3rem;
+}
+
+.footer {
+    width: 100vw;
+    background-color: black;
+    /* margin-top: 6vh; */
+    height: 12vh;
+    text-align: center;
+}
+
+.footer .social [class^="icon-"] {
+    display: inline-block;
+    color: #333;
+    text-decoration: none;
+    font-size: 30px;
+    background: white;
+    border-radius: 50%;
+    margin: 10px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    padding: 5px;
+}
+
+.copy {
+    color: white;
+    height: 10px;
+    margin-top: -5px;
+}
+
+.hom-prod {
+    height: 25rem;
+    width: 16rem;
+    margin-left: 6rem;
+    /* margin: 3rem; */
+    /* background: var(--azul); */
+    transition: .5s;
 }
