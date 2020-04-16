@@ -172,7 +172,9 @@ function validacion_super_mamalona_estoy_mamadisimo_hdp() {
             }
         }
     }
+
     var cad_val = document.getElementById("cad-vali").value;
+
     for (var i = 0; i < cad_val.length; i++) {
         car_act = cad_val.charAt(i);
 
@@ -181,12 +183,12 @@ function validacion_super_mamalona_estoy_mamadisimo_hdp() {
                 val_car = j;
             }
         }
+
         var andrea = (salto * (final_selecs.length / final_estados));
         val_car = val_car + andrea;
-        console.log("val_car: " + val_car);
-        console.log("andrea: " + andrea);
+
         sel_actual = document.getElementById("sel" + val_car);
-        console.log("sel" + val_car);
+
         var value = sel_actual[sel_actual.selectedIndex].value;
 
         for (var j = 0; j < final_estados; j++) {

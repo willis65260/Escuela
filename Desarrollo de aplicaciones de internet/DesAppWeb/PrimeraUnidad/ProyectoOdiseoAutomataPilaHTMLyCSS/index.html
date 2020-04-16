@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automata</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+    <div class="contenedor-tabla">
+        <h1>Tabla</h1>
+        <h4>A=Apilar D=Desapilar Na=No hacer nada</h4>
+        <div id="cont-tabla">
+
+        </div>
+    </div>
+
+    <div class="verificar-cadena">
+        <h4>Ingrese la cadena a validar con el lenguaje</h4>
+        <h4>Lenguaje: a=n b=m c
+            <=n+m n>=0 m>0</h4>
+
+        <label for="cadena">Cadena:</label>
+        <input type="text" class="text" id="cadena" onpaste="return false">
+        <button class="boton" id="aceptar-cadena">
+            Aceptar
+        </button>
+        <div id="mostrar-mensaje">
+            Aqui se dirá si la cadena es aceptada o no
+        </div>
+    </div>
+    <script>
+        var cont_tabla = document.getElementById('cont-tabla')
+        var aceptar_cadena = document.getElementById('aceptar-cadena')
+
+
+        var filas_vec = ['(a,z)', '(a,a)', '(a,b)', '(b,z)', '(b,a)', '(b,b)', '(c,a)', '(c,b)', '($,z)']
+        var estados_vec = ['E', 'Q0A', 'Q0D', 'Q0Na', 'Q1A', 'Q1D', 'Q1Na', 'Q2A', 'Q2D', 'Q2Na']
+        var estados_num = 3
+        var columna_vec = ['Q0', 'Q1', 'Q2']
+
+        var salto = 0
+
+        var fin_sel = init()
+
+
+
+        function llenar_tabla() {
+            var sel = generar_select()
+            var cadena_tabla = '<table><tr><td>Tabla</td>';
+            for (var i = 0; i < filas_vec.length; i++) {
+                cadena_tabla = cadena_tabla + '<td>' + filas_vec[i] + '</td>'
+            }
+            cadena_tabla = generar_filas(cadena_tabla, sel)
+            cadena_tabla = cadena_tabla + '</table>'
+            cont_tabla.innerHTML = cadena_tabla
+            return sel
+        }
+
+        function generar_filas(cad, sel) {
+            for (let i = 0; i < columna_vec.length; i++) {
+                cad = cad + '<tr><td>' + columna_vec[i] + '</td>'
+                for (let j = (i * (filas_vec.length)); j < (filas_vec.length + ((i * filas_vec.length))); j++) {
+                    cad = cad + '<td>' + sel[j].outerHTML + '</td>'
+                }
+                cad = cad + '</tr>'
+            }
+            return cad
+        }
+
+        function generar_select() {
+            var long_array = estados_num * filas_vec.length;
+            var selecs = new Array(long_array);
+
+            for (let i = 0; i < selecs.length; i++) {
+
+                var sel = document.createElement('SELECT');
+                var nombre = 'sel' + i;
+                sel.setAttribute('id', nombre);
+                selecs[i] = (sel);
+
+                for (let j = 0; j < estados_vec.length; j++) {
+                    var z = document.createElement('option');
+                    var nom = estados_vec[j];
+                    z.setAttribute('value', nom);
+                    var t = document.createTextNode(nom);
+                    z.appendChild(t);
+                    selecs[i].appendChild(z);
+                }
+
+            }
+
+            return selecs;
+        }
+
+        function inicializar_tabla() {
+            // Selecs de Q0
+            document.getElementById('sel0').selectedIndex = 1
+            document.getElementById('sel1').selectedIndex = 1
+            document.getElementById('sel3').selectedIndex = 4
+            document.getElementById('sel4').selectedIndex = 4
+
+            // Selecs de Q1
+            document.getElementById('sel14').selectedIndex = 4
+            document.getElementById('sel16').selectedIndex = 8
+
+            // Selecs de Q2
+            document.getElementById('sel24').selectedIndex = 8
+            document.getElementById('sel25').selectedIndex = 8
+            document.getElementById('sel26').selectedIndex = 9
+
+        }
+
+        aceptar_cadena.onclick = function() {
+            // fin_sel
+            var cad_val = document.getElementById('cadena').value
+
+            var pila = new Array();
+
+            var n = 0
+            var m = 0
+
+            if (cad_val == '' || cad_val.length == 0) {
+                document.getElementById('mostrar-mensaje').innerText = 'Cadena no aceptada'
+                return
+
+            } else {
+                cad_val = cad_val + '$'
+
+                pila.push('z')
+
+                for (var i = 0; i < (cad_val.length - 1); i++) {
+
+                    if (pila[i] == 'z') {
+                        if (cad_val.charAt(i) == 'a') {
+                            salto = 0
+                            n++
+                            pila.push(cad_val.charAt(i))
+                        } else if (cad_val.charAt(i) == 'b') {
+                            salto = 1
+                            m++
+                            pila.push(cad_val.charAt(i))
+                        } else {
+                            document.getElementById('mostrar-mensaje').innerText = 'Cadena no aceptada'
+                            return
+                        }
+                    }
+
+                    if (pila[i] == 'a') {
+                        if (cad_val.charAt(i) == 'a') {
+                            salto = 0
+                            n++
+                            pila.push(cad_val.charAt(i))
+                        } else if (cad_val.charAt(i) == 'b') {
+                            salto = 1
+                            m++
+                            pila.push(cad_val.charAt(i))
+                        } else {
+                            document.getElementById('mostrar-mensaje').innerText = 'Cadena no aceptada'
+                            return
+                        }
+                    }
+
+                    if (pila[i] == 'b') {
+                        if (cad_val.charAt(i) == 'a') {
+                            document.getElementById('mostrar-mensaje').innerText = 'Cadena no aceptada'
+                            return
+                        } else if (cad_val.charAt(i) == 'b') {
+                            salto = 1
+                            m++
+                            pila.push(cad_val.charAt(i))
+                        } else {
+                            document.getElementById('mostrar-mensaje').innerText = 'Cadena no aceptada'
+                            return
+                        }
+                    }
+
+                }
+
+                var cad_c = new Array()
+                cad_c.push('$')
+                for (var i = 0; i < (pila.length - 1); i++) {
+                    cad_c.push('c')
+                }
+
+                for (var i = 0; i < n + m; i++) {
+                    // if (pila[i] == 'z') {
+                    //     if (cad_c.indexOf(i) == '$') {
+                    //         cadena
+                    //     }
+                    // }
+                    if (pila[i] == 'a' || pila[i] == 'b') {
+                        pila.pop()
+                        cad_c.pop()
+                    }
+                }
+
+
+                if (pila[0] == 'z' && cad_c[0] == '$')
+                    document.getElementById('mostrar-mensaje').innerText = 'Cadena Aceptada'
+
+            }
+
+
+
+        }
+
+
+
+        function init() {
+            var sel = llenar_tabla()
+            inicializar_tabla()
+            return sel
+        }
+    </script>
+</body>
+
+
+</html>
