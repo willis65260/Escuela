@@ -1,0 +1,4 @@
+Buen dia profe, para ajecutar el programa solo abra el index.html 
+y dele en compilar ya viene precargado con un codigo para probar, 
+y el codigo viene en A_lexico.js ya que en un principio los ibamos a hacer 
+por separadao pero nos fuimos de paso en un solo archivo.
