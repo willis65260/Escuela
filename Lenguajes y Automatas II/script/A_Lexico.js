@@ -378,7 +378,6 @@ document.getElementById('compilar').onclick = function () {
             } else if (asignacion == ent) {
                 ban_asignacion = true
                 //asignado = ent
-                console.log('estas pendejo mijo ')
                 return ent
             } else if (operacion.indexOf(ent) != -1) {
                 //saca los dos tipos de dato de arriba de la tabla semantica
